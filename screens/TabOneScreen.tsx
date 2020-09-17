@@ -3,14 +3,19 @@ import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import {observer, Provider} from "mobx-react";
+import userStore from '../store/UserStore';
 
 export default function TabOneScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
-    </View>
+      <Provider userStore={userStore}>
+        {/* Вывести значение store user в компоненте UserProfile */}
+        <View style={styles.container}>
+          <Text style={styles.title}>Tab One</Text>
+          <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+          <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+        </View>
+      </Provider>
   );
 }
 
