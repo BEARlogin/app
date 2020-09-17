@@ -1,11 +1,14 @@
-import userStore from '../store/UserStore';
+import { observer } from "mobx-react";
 import React from "react";
-import {observer} from "mobx-react";
 
-export const UserProfile = observer(() =>{
-    return(
-        <div>
-            {userStore.user?.username}
-        </div>
-    );
-})
+import store from "../stores/index";
+
+export const UserProfile = observer(() => {
+  const user = store.auth.context.user;
+  return (
+    <div>
+      {user?.name}
+      <button onClick={store.auth.login}>Login</button>
+    </div>
+  );
+});
