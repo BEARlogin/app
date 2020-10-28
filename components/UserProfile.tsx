@@ -1,14 +1,14 @@
 import { observer } from "mobx-react";
 import React from "react";
-
+import { View, Button } from 'react-native';
 import store from "../stores/index";
 
-export const UserProfile = observer(() => {
+export const UserProfile = observer(( ) => {
   const user = store.auth.context.user;
   return (
-    <div>
+    <View>
       {user?.name}
-      <button onClick={store.auth.login}>Login</button>
-    </div>
+      <Button onPress={store.auth.login} title={"Login"}></Button> 
+    </View>
   );
 });
