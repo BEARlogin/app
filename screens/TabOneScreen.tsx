@@ -5,11 +5,19 @@ import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { UserProfile } from "../components/UserProfile";
 
-export default function TabOneScreen() {
+import { observer } from "mobx-react";
+import NavigationStore from "../navigation/NavigationStore";
+import store from "./store";
+
+function TabOneScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab One</Text>
       <UserProfile />
+      <Button title={"Back Nav"} onPress={() => NavigationStore.backNav()} ></Button>
+      <Text>{store.count}</Text>
+      <Button title={"+"} onPress={() => store.plus()} ></Button>
+      <Button title={"-"} onPress={() => store.minus()} ></Button>
       <View
         style={styles.separator}
         lightColor="#eee"
@@ -19,6 +27,8 @@ export default function TabOneScreen() {
     </View>
   );
 }
+
+export default observer(TabOneScreen);
 
 const styles = StyleSheet.create({
   container: {

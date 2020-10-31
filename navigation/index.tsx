@@ -8,9 +8,11 @@ import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 
-import AuthScreen from '../screens/AuthScreen';
+import { observer, Provider } from "mobx-react"
+import NavigationStore from "./NavigationStore"
 
-const isSignIn = false; 
+import AuthScreen from '../screens/AuthScreen';
+import NewAccount from "../screens/NewAccountScreen"
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -28,16 +30,15 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 // Read more here: https://reactnavigation.org/docs/modal
 const Stack = createStackNavigator<RootStackParamList>();
 
-function RootNavigator() {
+const RootNavigator = observer(() => {
   return (
-    <Stack.Navigator>
-      { isSignIn ? (
-      <Stack.Screen name="Root" component={BottomTabNavigator} />
-      // <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />      
-      ) : ( <Stack.Screen name="Root" component={AuthScreen} /> )
-      }
-    </Stack.Navigator>
-  );
-}
+      <Stack.Navigator>
+       { NavigationStore.isSigIn ? (
+          <Stack.Screen name="Root" component={BottomTabNavigator} />   
+          ) : (<Stack.Screen name="AuthScreen" component={AuthScreen} options={{ headerShown: false  }} />)
+       } 
+      </Stack.Navigator>
+  ) 
+} )
 
 

@@ -1,5 +1,7 @@
 export type RootStackParamList = {
   Root: undefined;
+  AuthScreen: undefined;
+  NewAccount: undefined;
   NotFound: undefined;
 };
 
